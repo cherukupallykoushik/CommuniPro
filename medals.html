@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CommuniPro Levels</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:linear-gradient(135deg,#0f172a,#1e293b);
+color:white;
+text-align:center;
+padding-top:100px;
+}
+
+h1{
+font-size:40px;
+}
+
+.medal{
+font-size:120px;
+margin:30px;
+}
+
+.level{
+font-size:35px;
+font-weight:bold;
+}
+
+.score{
+font-size:20px;
+margin-top:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Your CommuniPro Level</h1>
+
+<div class="medal" id="medal"></div>
+
+<div class="level" id="level"></div>
+
+<div class="score" id="score"></div>
+
+<script>
+
+let score = localStorage.getItem("finalScore")
+
+if(score===null){
+
+document.getElementById("level").innerText="Complete the test first"
+}
+
+else{
+
+score = Number(score)
+
+document.getElementById("score").innerText="Score : "+score
+
+if(score < 50){
+
+document.getElementById("medal").innerText="🥉"
+document.getElementById("level").innerText="Bronze Level"
+
+}
+
+else if(score < 70){
+
+document.getElementById("medal").innerText="🥈"
+document.getElementById("level").innerText="Silver Level"
+
+}
+
+else if(score < 90){
+
+document.getElementById("medal").innerText="🥇"
+document.getElementById("level").innerText="Gold Level"
+
+}
+
+else{
+
+document.getElementById("medal").innerText="🏆"
+document.getElementById("level").innerText="Platinum Level"
+
+localStorage.setItem("platinumUnlocked","true")
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

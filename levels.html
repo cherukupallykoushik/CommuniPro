@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>CommuniPro Levels</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#0f172a;
+color:white;
+text-align:center;
+}
+
+.container{
+margin-top:100px;
+}
+
+button{
+
+padding:15px 30px;
+font-size:18px;
+border:none;
+border-radius:10px;
+background:gold;
+cursor:pointer;
+
+}
+
+button:hover{
+background:#facc15;
+}
+
+.medal{
+
+font-size:60px;
+margin-top:20px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>CommuniPro Levels</h1>
+
+<p>Complete all roadmaps to unlock Platinum</p>
+
+<button onclick="unlockPlatinum()">Complete Roadmap (Demo)</button>
+
+<div id="medal" class="medal"></div>
+
+</div>
+
+<script>
+
+function unlockPlatinum(){
+
+localStorage.setItem("medalLevel","platinum")
+
+document.getElementById("medal").innerHTML="🏆 Platinum Level Achieved!"
+
+alert("Congratulations! Platinum Level Unlocked")
+
+}
+
+</script>
+
+</body>
+</html>

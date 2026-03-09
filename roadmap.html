@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>CommuniPro Roadmap</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+font-family:Poppins;
+background:#0f172a;
+color:white;
+text-align:center;
+}
+
+/* ROADMAP GRID */
+
+.roadmap{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+width:80%;
+margin:auto;
+margin-top:50px;
+}
+
+/* ROADMAP CARD */
+
+.stage{
+
+background:#1e293b;
+
+padding:25px;
+
+border-radius:15px;
+
+cursor:pointer;
+
+transition:0.3s;
+
+}
+
+.stage:hover{
+transform:scale(1.07);
+background:#6366f1;
+}
+
+/* POPUP */
+
+.modal{
+
+display:none;
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,0.8);
+
+justify-content:center;
+
+align-items:center;
+
+}
+
+.modal-content{
+
+background:white;
+
+color:black;
+
+padding:40px;
+
+border-radius:15px;
+
+width:400px;
+
+text-align:left;
+
+}
+
+.close{
+float:right;
+cursor:pointer;
+font-size:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>🧭 Communication Learning Roadmap</h1>
+
+<div class="roadmap">
+
+<div class="stage" onclick="openStage(1)">
+1️⃣ Basic Speaking Confidence
+</div>
+
+<div class="stage" onclick="openStage(2)">
+2️⃣ Vocabulary Building
+</div>
+
+<div class="stage" onclick="openStage(3)">
+3️⃣ Pronunciation Improvement
+</div>
+
+<div class="stage" onclick="openStage(4)">
+4️⃣ Listening Skills
+</div>
+
+<div class="stage" onclick="openStage(5)">
+5️⃣ Public Speaking
+</div>
+
+<div class="stage" onclick="openStage(6)">
+6️⃣ Professional Communication
+</div>
+
+<div class="stage" onclick="openStage(7)">
+7️⃣ Interview Communication
+</div>
+
+<div class="stage" onclick="openStage(8)">
+8️⃣ Leadership Communication
+</div>
+
+</div>
+
+<!-- POPUP -->
+
+<div class="modal" id="modal">
+
+<div class="modal-content">
+
+<span class="close" onclick="closeModal()">❌</span>
+
+<h2 id="title"></h2>
+
+<p id="description"></p>
+
+<h3>Practice Exercises</h3>
+
+<ul id="exercises"></ul>
+
+</div>
+
+</div>
+
+
+<script>
+
+function openStage(stage){
+
+let title=""
+let description=""
+let exercises=""
+
+if(stage==1){
+title="Basic Speaking Confidence"
+description="Learn to speak simple sentences confidently."
+exercises=[
+"Introduce yourself in English",
+"Speak for 1 minute about your college",
+"Practice daily conversation"
+]
+}
+
+if(stage==2){
+title="Vocabulary Building"
+description="Improve vocabulary with daily new words."
+exercises=[
+"Learn 5 new words",
+"Use each word in a sentence",
+"Take vocabulary quiz"
+]
+}
+
+if(stage==3){
+title="Pronunciation Improvement"
+description="Improve clarity and pronunciation."
+exercises=[
+"Listen and repeat sentences",
+"Practice difficult words",
+"Record and review your voice"
+]
+}
+
+if(stage==4){
+title="Listening Skills"
+description="Understand spoken English better."
+exercises=[
+"Watch English videos",
+"Write summary",
+"Answer listening questions"
+]
+}
+
+if(stage==5){
+title="Public Speaking"
+description="Speak confidently in front of people."
+exercises=[
+"Give 2 minute speech",
+"Explain a topic",
+"Practice presentation"
+]
+}
+
+if(stage==6){
+title="Professional Communication"
+description="Learn workplace communication."
+exercises=[
+"Write professional emails",
+"Practice meeting conversation",
+"Explain ideas clearly"
+]
+}
+
+if(stage==7){
+title="Interview Communication"
+description="Answer interview questions confidently."
+exercises=[
+"Tell me about yourself",
+"Strengths and weaknesses",
+"Mock interview practice"
+]
+}
+
+if(stage==8){
+title="Leadership Communication"
+description="Lead discussions and presentations."
+exercises=[
+"Lead group discussion",
+"Give motivational speech",
+"Manage team communication"
+]
+}
+
+document.getElementById("title").innerText=title
+document.getElementById("description").innerText=description
+
+let list=""
+exercises.forEach(e=>{
+list+="<li>"+e+"</li>"
+})
+
+document.getElementById("exercises").innerHTML=list
+
+document.getElementById("modal").style.display="flex"
+
+}
+
+function closeModal(){
+document.getElementById("modal").style.display="none"
+}
+
+</script>
+
+</body>
+
+</html>

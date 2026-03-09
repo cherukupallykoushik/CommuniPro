@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CommuniPro Certificate</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+background:linear-gradient(135deg,#0f172a,#1e293b);
+text-align:center;
+color:white;
+}
+
+.top{
+margin-top:40px;
+}
+
+input{
+padding:12px;
+width:260px;
+border-radius:8px;
+border:none;
+}
+
+button{
+padding:12px 20px;
+margin-top:15px;
+border:none;
+border-radius:8px;
+background:#6366f1;
+color:white;
+cursor:pointer;
+font-size:16px;
+}
+
+button:hover{
+background:#4f46e5;
+}
+
+.certificate{
+
+display:none;
+
+width:950px;
+
+margin:50px auto;
+
+padding:70px;
+
+background:white;
+
+color:#111;
+
+border:18px solid;
+
+border-image:linear-gradient(45deg,#d4af37,#facc15,#d4af37) 1;
+
+box-shadow:0 20px 50px rgba(0,0,0,0.4);
+
+position:relative;
+
+}
+
+.logo{
+
+font-size:32px;
+
+font-weight:bold;
+
+color:#d4af37;
+
+letter-spacing:2px;
+
+}
+
+.title{
+
+font-family:'Playfair Display',serif;
+
+font-size:46px;
+
+margin-top:15px;
+
+}
+
+.subtitle{
+
+font-size:20px;
+
+margin-top:10px;
+
+color:#444;
+
+}
+
+.name{
+
+font-family:'Great Vibes',cursive;
+
+font-size:64px;
+
+margin:35px 0;
+
+color:#111;
+
+}
+
+.text{
+
+font-size:20px;
+
+line-height:1.7;
+
+margin:20px auto;
+
+width:80%;
+
+}
+
+.platinum{
+
+font-weight:bold;
+
+color:#2563eb;
+
+}
+
+.footer{
+
+display:flex;
+
+justify-content:space-between;
+
+margin-top:60px;
+
+font-size:18px;
+
+}
+
+.signature{
+
+border-top:2px solid #333;
+
+padding-top:5px;
+
+width:200px;
+
+margin:auto;
+
+}
+
+.date{
+
+margin-top:30px;
+
+font-size:18px;
+
+}
+
+.id{
+
+margin-top:20px;
+
+font-size:14px;
+
+color:#555;
+
+}
+
+.badge{
+
+position:absolute;
+
+top:40px;
+
+right:40px;
+
+font-size:40px;
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="top">
+
+<h1>CommuniPro Certificate Generator</h1>
+
+<input id="name" placeholder="Enter your name">
+
+<br>
+
+<button onclick="generateCertificate()">Generate Certificate</button>
+
+<p id="msg" style="color:#f87171;"></p>
+
+</div>
+
+
+<div id="certificate" class="certificate">
+
+<div class="badge">🏆</div>
+
+<div class="logo">COMMUNIPRO</div>
+
+<div class="title">Certificate of Achievement</div>
+
+<div class="subtitle">This certificate is proudly awarded to</div>
+
+<div class="name" id="studentName"></div>
+
+<div class="text">
+
+For successfully achieving the <span class="platinum">PLATINUM LEVEL</span>  
+in the CommuniPro Communication Training Program.
+
+Your dedication to improving communication, speaking,
+and language skills is truly appreciated.
+
+</div>
+
+<div class="date" id="date"></div>
+
+<div class="footer">
+
+<div>
+<div class="signature">Instructor</div>
+</div>
+
+<div>
+<div class="signature">CommuniPro Director</div>
+</div>
+
+</div>
+
+<div class="id" id="certId"></div>
+
+<br>
+
+<button onclick="window.print()">Download Certificate</button>
+
+</div>
+
+
+<script>
+
+function generateCertificate(){
+
+let score = localStorage.getItem("finalScore")
+
+if(score===null){
+
+document.getElementById("msg").innerText=
+"Please complete the test first."
+
+return
+
+}
+
+score = Number(score)
+
+if(score < 90){
+
+document.getElementById("msg").innerText=
+"Certificate available only for Platinum level (90+ score)."
+
+return
+
+}
+
+let name=document.getElementById("name").value
+
+if(name===""){
+
+alert("Please enter your name")
+
+return
+
+}
+
+document.getElementById("certificate").style.display="block"
+
+document.getElementById("studentName").innerText=name
+
+document.getElementById("date").innerText=
+"Date: " + new Date().toLocaleDateString()
+
+let id = "CP-" + Math.floor(Math.random()*100000)
+
+document.getElementById("certId").innerText=
+"Certificate ID: " + id
+
+}
+
+</script>
+
+</body>
+</html>

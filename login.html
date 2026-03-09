@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CommuniPro Login</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(135deg,#0f172a,#1e293b);
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+}
+
+.login-box{
+background:#1e293b;
+padding:40px;
+border-radius:12px;
+width:320px;
+text-align:center;
+box-shadow:0 10px 25px rgba(0,0,0,0.5);
+}
+
+input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:none;
+border-radius:6px;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#6366f1;
+border:none;
+border-radius:6px;
+color:white;
+cursor:pointer;
+font-size:16px;
+}
+
+button:hover{
+background:#4f46e5;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+<h2>CommuniPro Login</h2>
+
+<input id="username" placeholder="Enter Username">
+
+<input id="password" type="password" placeholder="Enter Password">
+
+<button type="button" onclick="login()">Login</button>
+
+<p id="error" style="color:#f87171;"></p>
+
+</div>
+
+<script>
+
+function login(){
+
+let username=document.getElementById("username").value
+let password=document.getElementById("password").value
+
+if(username==="" || password===""){
+
+document.getElementById("error").innerText="Please enter login details"
+return
+
+}
+
+/* save username */
+
+localStorage.setItem("username",username)
+
+/* redirect to dashboard */
+
+window.location.href="index.html"
+
+}
+
+</script>
+
+</body>
+</html>

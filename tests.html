@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CommuniPro Practice</title>
+
+<style>
+body{
+font-family:Arial;
+background:#0f172a;
+color:white;
+text-align:center;
+margin:0;
+}
+
+h1{
+margin-top:30px;
+}
+
+.container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+width:90%;
+margin:auto;
+margin-top:40px;
+}
+
+.card{
+background:#1e293b;
+padding:25px;
+border-radius:15px;
+box-shadow:0 10px 20px rgba(0,0,0,0.4);
+}
+
+button{
+padding:12px 18px;
+margin:8px;
+border:none;
+border-radius:8px;
+background:#6366f1;
+color:white;
+cursor:pointer;
+}
+
+button:hover{
+background:#4f46e5;
+}
+
+input{
+padding:10px;
+width:80%;
+border-radius:8px;
+border:none;
+margin-top:10px;
+}
+
+.score{
+font-size:22px;
+margin-top:15px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>CommuniPro Communication Practice</h1>
+
+<p class="score">Score: <span id="score">0</span></p>
+
+<div class="container">
+
+<!-- VOCABULARY -->
+
+<div class="card">
+
+<h2>Vocabulary Speaking Test</h2>
+
+<p>Say the meaning of <b>Articulate</b></p>
+
+<button onclick="startVocab()">Start Speaking</button>
+
+<p id="vocabResult"></p>
+
+</div>
+
+
+<!-- SPEAKING PRACTICE -->
+
+<div class="card">
+
+<h2>Speaking Practice</h2>
+
+<p>Introduce yourself</p>
+
+<button onclick="startSpeech()">Start Speaking</button>
+
+<p id="speechOutput"></p>
+
+</div>
+
+
+<!-- SPEAKER TEST -->
+
+<div class="card">
+
+<h2>Speaker Test</h2>
+
+<p>Type text and hear it</p>
+
+<input id="speakInput" placeholder="Type sentence">
+
+<br><br>
+
+<button onclick="speakText()">Read Text</button>
+
+</div>
+
+
+<!-- GRAMMAR -->
+
+<div class="card">
+
+<h2>Grammar Test</h2>
+
+<p>Choose correct sentence</p>
+
+<button onclick="grammar(true)">She goes to college daily</button>
+
+<button onclick="grammar(false)">She go to college daily</button>
+
+<p id="grammarResult"></p>
+
+</div>
+
+</div>
+
+
+<script>
+
+let score = 0
+
+function updateScore(){
+document.getElementById("score").innerText = score
+}
+
+
+/* CHECK SPEECH SUPPORT */
+
+function getRecognition(){
+
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+
+if(!SpeechRecognition){
+alert("Speech recognition works best in Chrome")
+return null
+}
+
+let recognition = new SpeechRecognition()
+
+recognition.lang="en-US"
+recognition.interimResults=false
+recognition.maxAlternatives=1
+
+return recognition
+
+}
+
+
+/* VOCABULARY SPEECH */
+
+function startVocab(){
+
+let recognition = getRecognition()
+
+if(!recognition) return
+
+document.getElementById("vocabResult").innerText="Listening..."
+
+recognition.start()
+
+recognition.onresult=function(event){
+
+let text = event.results[0][0].transcript.toLowerCase()
+
+document.getElementById("vocabResult").innerText="You said: "+text
+
+if(text.includes("speak") || text.includes("clear")){
+
+document.getElementById("vocabResult").innerText+=" ✅ Correct meaning"
+
+score+=10
+updateScore()
+
+}else{
+
+document.getElementById("vocabResult").innerText+=" ❌ Try again"
+
+}
+
+}
+
+recognition.onerror=function(){
+
+document.getElementById("vocabResult").innerText="Microphone error or permission denied"
+
+}
+
+}
+
+
+
+/* SPEAKING PRACTICE */
+
+function startSpeech(){
+
+let recognition = getRecognition()
+
+if(!recognition) return
+
+document.getElementById("speechOutput").innerText="Listening..."
+
+recognition.start()
+
+recognition.onresult=function(event){
+
+let text = event.results[0][0].transcript
+
+document.getElementById("speechOutput").innerText="You said: "+text
+
+score+=10
+updateScore()
+
+}
+
+recognition.onerror=function(){
+
+document.getElementById("speechOutput").innerText="Microphone error"
+
+}
+
+}
+
+
+
+/* TEXT TO SPEECH */
+
+function speakText(){
+
+let text=document.getElementById("speakInput").value
+
+if(text===""){
+alert("Please type something")
+return
+}
+
+let speech=new SpeechSynthesisUtterance(text)
+
+speech.lang="en-US"
+
+window.speechSynthesis.speak(speech)
+
+}
+
+
+
+/* GRAMMAR */
+
+function grammar(correct){
+
+if(correct){
+
+document.getElementById("grammarResult").innerText="Correct!"
+
+score+=10
+updateScore()
+
+}else{
+
+document.getElementById("grammarResult").innerText="Incorrect sentence"
+
+}
+
+}
+
+
+
+/* FINISH TEST BUTTON */
+
+function finishTest(){
+
+localStorage.setItem("finalScore", score)
+
+alert("Test completed! Your score: " + score)
+
+window.location.href="medals.html"
+
+}
+
+</script>
+
+
+<br><br>
+
+<button onclick="finishTest()" style="padding:15px 30px;font-size:18px;background:#22c55e">
+Finish Test
+</button>
+
+</body>
+</html>
